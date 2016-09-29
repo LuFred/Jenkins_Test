@@ -1,0 +1,12 @@
+    position: absolute;
+    z-index: 5601;
+    overflow: visible;
+    cursor: default;
+    pointer-events: none;
+    opacity: 1;
+    border: 0px solid rgb(0, 0, 0);
+    border-radius: 0px;
+    width: 1920px;
+    height: 120px;
+    transform: translateZ(1e+12px) translate(0px, 810px) translate(-960px, 60px) rotate(0deg) translate(960px, -60px);
+    background: none 0px 0px;

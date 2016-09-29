@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Vidahouse</title>
+		<link rel="stylesheet" href="Content/css/index.css">
+		<link rel="stylesheet" href="Content/css/iconfont.css">
+		<script src="App/js/DevConfig.js"></script>
+	</head>
+
+	<body>
+		
+
+		<section class="register_hidden" id="register_hidden">
+			<div class="register">
+				<img src="Content/images/register/close.jpg" class="close_button" id="close_button" />
+				<h3 class="register_title">欢迎下载vidahouse客户端</h3>
+				<form class="user_information" id="commentForm" method="get" action="">
+					<div class="user_name">
+						<input type="text" id="user_name" class="input_name" placeholder="账号" name="name" minlength="2" required/>
+					</div>
+
+					<div class="user_psw">
+						<input type="text" id="password" class="input_psw" name="password" placeholder="密码" />
+					</div>
+
+					<div class="user_psw_sure">
+						<input type="password" id="user_psw_sure" class="input_psw_sure" placeholder="请确认密码" name="confirm_password" />
+					</div>
+
+					<div class="user_tel">
+						<input type="text" id="user_tel" class="input_tel" placeholder="手机号 " name="user_tel" />
+						<div class="region_select">
+							<select name="tel_select">
+								<option value="">中国 +86</option>
+								<option value="00886">台湾 +886</option>
+								<option value="00852">香港 +852</option>
+								<option value="0060">马来西亚 +60</option>
+								<option value="0065">新加坡 +65</option>
+								<option value="0081">日本 +81</option>
+								<option value="0082">韩国 +82</option>
+								<option value="001">美国 +1</option>
+								<option value="001">加拿大 +1</option>
+								<option value="0061">澳大利亚 +61</option>
+								<option value="0064">新西兰 +64</option>
+								<option value="00971">阿联酋 +971</option>
+								<option value="00244">安哥拉 +244</option>
+								<option value="00853">澳门 +853</option>
+								<option value="0055">巴西 +55</option>
+								<option value="0045">丹麦 +45</option>
+								<option value="0049">德国 +49</option>
+								<option value="007">俄罗斯 +7</option>
+								<option value="0033">法国 +33</option>
+								<option value="0063">菲律宾 +63</option>
+								<option value="00358">芬兰 +358</option>
+								<option value="0031">荷兰 +31</option>
+								<option value="00420">捷克 +420</option>
+								<option value="0041">瑞士 +41</option>
+								<option value="0046">瑞典 +46</option>
+								<option value="0066">泰国 +66</option>
+								<option value="0058">委内瑞拉 +58</option>
+								<option value="0034">西班牙 +34</option>
+								<option value="0039">意大利 +39</option>
+								<option value="0091">印度 +91</option>
+								<option value="0062">印度尼西亚 +62</option>
+								<option value="0044">英国 +44</option>
+								<option value="0084">越南 +84</option>
+							</select>
+						</div>
+                     </div>
+                    <div class="auth_code">
+						<input type="text" id="write_auth_code" class="write_auth_code" name="write_auth_code" />
+						<input type="button" id="getting_code" value="获取验证码" class="getting_code" name="get_code">
+					</div>
+				</form>
+				<a class="button_register" id="button_register">
+					下载
+				</a>
+			</div>
+		</section>
+		
+		
+		<header>
+			<div class="index_nav">
+				<img src="images/index/index_logo.png" alt="">
+				<ul id="menu">
+					<li data-menuanchor="first" class="active"><a href="#first">首页</a></li>
+					<li data-menuanchor="second"><a href="#second">关于我们</a></li>
+					<li data-menuanchor="third"><a href="#third">下载</a></li>
+					<li data-menuanchor="forth"><a href="#forth">设计</a></li>
+					<li data-menuanchor="fifth"><a href="#fifth">跨平台</a></li>
+					<li data-menuanchor="sixth"><a href="#sixth">A</a></li>
+				</ul>
+				
+				<div class="index_nav_logReg" id="index_nav_logReg">登陆/免费注册</div>
+			</div>
+	   </header>
+	 <div class="fullPage">
+		<div class="index_panoramaBox section">
+			<div class="index_panorama">
+				<div class="index_panorama_wrap">
+					<iframe  id="Iframe"  src="./krpano/index.html" width="100%" height="100%" scrolling="no" frameborder="0"  marginheight="0" marginwidth="0" allowfullscreen="false" mozallowfullscreen="true" webkitallowfullscreen="false">
+    				</iframe>
+				</div>
+				<div class="index_panorama_icons">
+					<ul>
+						<li>
+							<div class="iconBtn" data-content="index_iconDetails_content1">
+								<img style="width:0.55rem;height:0.33rem;" src="images/index/icon1.png" alt="">
+							</div>
+							<span>一键<br/>风格化</span>
+						</li>
+						<li>
+							<div class="iconBtn" data-content="index_iconDetails_content2">
+								<img style="width:0.47rem;height:0.52rem;" src="images/index/icon2.png" alt="">
+							</div>
+							<span>支持<br/>主要格式</span>
+						</li>
+						<li>
+							<div class="iconBtn" data-content="index_iconDetails_content3">
+								<img style="width:0.56rem;height:0.45rem;" src="images/index/icon3.png" alt="">
+							</div>
+							<span>应用内<br/>通讯</span>
+						</li>
+						<li>
+							<div class="iconBtn" data-content="index_iconDetails_content4">
+								<img style="width:0.33rem;height:0.50rem;" src="images/index/icon4.png" alt="">
+							</div>
+							<span>支持<br/>移动</span>
+						</li>
+					</ul>
+				</div>
+				<a class="index_arrow" href="#">
+					<img src="images/index/index_arrow1.png" alt="">
+				</a>
+			</div>
+		</div>
+		<div class="index_iconDetails section">
+			<div class="iconContentBox">
+				<div class="iconContent index_iconDetails_content1">
+					<div class="iconContent_title">一键套用任何设计风格</div>
+					<p>透过vidahouse@的独家技术，使我们能一键将任何的房间模型改成现有的风格。我们现已拥有3500套不同的风格。</p>
+					<div class="index_iconDetails_content1_left">
+						<img src="images/index/index_iconDetails_content1_left.jpg" alt="">
+						<span>你家</span>
+					</div>
+					<div class="index_iconDetails_content1_center">
+						<img src="images/index/iconDetails_arrow.png" alt="">
+						<span>一秒</span>
+					</div>
+					<div class="index_iconDetails_content1_right">
+						<img src="images/index/index_iconDetails_content1_right.jpg" alt="">
+						<span>Waterhouse风格</span>
+					</div>
+				</div>
+				<div class="iconContent index_iconDetails_content2">
+					<div class="iconContent_title">支持导入所有主流3D格式</div>
+					<p>3DMax,....</p>
+					<ul>
+						<li>
+							<div class="format-3d"></div>
+							<span>3DMax</span>
+						</li>
+						<li>
+							<div class="format-3d"></div>
+							<span>3DMax</span>
+						</li>
+						<li>
+							<div class="format-3d"></div>
+							<span>3DMax</span>
+						</li>
+					</ul>
+				</div>
+				<div class="iconContent index_iconDetails_content3">
+					<div class="iconContent_title">即时在虚拟空间里远端协作</div>
+					<p>Vidahouse 讓你和身處遠端的客戶設計師共同即時討論設計和感覺，並即時進行修改和體驗，大幅減少了傳統更新設計稿的溝通時間。</p>
+					<div class="innerContact">
+						<img src="images/index/innerContact.jpg" alt="">
+					</div>
+				</div>
+				<div class="iconContent index_iconDetails_content4">
+					<div class="iconContent_title">手机即时沟通/修改</div>
+					<p>我們準備好了手機端的app，讓你能隨時隨地溝通修改設計，瀏覽世界各地設計師最好的新作品！</p>
+					<div class="supportMobile">
+						<img src="images/index/supportMobile.jpg" alt="">
+					</div>
+				</div>
+			</div>
+			<a class="index_arrow" href="#">
+				<img src="images/index/index_panorama_arrow.png" alt="">
+			</a>
+		</div>
+		<div class="index_video section">
+			<!-- <img src="images/index/video_bg.jpg" alt=""> -->
+			<video src="media/videos/vidahouse.mp4" preload="none" autoplay="true" controls></video>
+			<a class="index_arrow" href="#">
+				<img src="images/index/index_panorama_arrow.png" alt="">
+			</a>
+		</div>
+		<div class="index_excellentCases section">
+			<div class="index_excellentCases_title">
+				<span>优秀案例</span>
+			</div>
+			<ul>
+				<li>
+					<a href=""><img src="images/index/excellentCase6.jpg" alt=""></a>
+					<div class="index_excellentCases_mask">
+						<img src="images/index/index_excellentCases_mask_tip.png" alt="">
+						<div class="index_excellentCases_mask_other">
+							<h4>Alpha</h4>
+							<p>这让我省了很多时间</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/index/excellentCase2.jpg" alt=""></a>
+					<div class="index_excellentCases_mask">
+						<img src="images/index/index_excellentCases_mask_tip.png" alt="">
+						<div class="index_excellentCases_mask_other">
+							<h4>Alpha</h4>
+							<p>这让我省了很多时间</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/index/excellentCase3.jpg" alt=""></a>
+					<div class="index_excellentCases_mask">
+						<img src="images/index/index_excellentCases_mask_tip.png" alt="">
+						<div class="index_excellentCases_mask_other">
+							<h4>Alpha</h4>
+							<p>这让我省了很多时间</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/index/excellentCase4.jpg" alt=""></a>
+					<div class="index_excellentCases_mask">
+						<img src="images/index/index_excellentCases_mask_tip.png" alt="">
+						<div class="index_excellentCases_mask_other">
+							<h4>Alpha</h4>
+							<p>这让我省了很多时间</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/index/excellentCase5.jpg" alt=""></a>
+					<div class="index_excellentCases_mask">
+						<img src="images/index/index_excellentCases_mask_tip.png" alt="">
+						<div class="index_excellentCases_mask_other">
+							<h4>Alpha</h4>
+							<p>这让我省了很多时间</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/index/excellentCase1.jpg" alt=""></a>
+					<div class="index_excellentCases_mask">
+						<img src="images/index/index_excellentCases_mask_tip.png" alt="">
+						<div class="index_excellentCases_mask_other">
+							<h4>Alpha</h4>
+							<p>这让我省了很多时间</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<a class="index_arrow" href="#">
+				<img src="images/index/index_panorama_arrow.png" alt="">
+			</a>
+		</div>
+		<div class="index_parallaxPic section">
+			<div class="index_parallaxPic_mask"></div>
+			<a class="index_arrow" href="#">
+				<img src="images/index/index_panorama_arrow.png" alt="">
+			</a>
+		</div>
+		<div class="index_lastScreen section">
+			<div class="index_lastScreen_top">
+					<div class="index_lastScreen_download">
+						<a href="">下载</a>
+					</div>
+					<div class="index_lastScreen_aboutUs">
+					<div class="index_lastScreen_aboutUs_title">
+						<span>关于我们</span>
+					</div>
+					<ul>
+						<li>
+							<div class="index_aboutUs_video">
+								<video src="" style="background:url(images/index/aboutUs_video1.jpg);background-size:cover; background-position: center center">
+								</video>
+								<img src="images/index/aboutUs_video_play.png" alt="">
+								<div class="index_aboutUs_video_mask"></div>
+							</div>
+							<span>1、关于我们</span>
+						</li>
+						<li>
+							<div class="index_aboutUs_video">
+								<img src="images/index/aboutUs_video_play.png" alt="">
+								<div class="index_aboutUs_video_mask"></div>
+								<video src="" style="background:url(images/index/aboutUs_video2.jpg);background-size:cover; background-position: center center">
+								</video>
+							</div>
+							<span>2、视频</span>
+						</li>
+						<li>
+							<div class="index_aboutUs_video">
+								<img src="images/index/aboutUs_video_play.png" alt="">
+								<div class="index_aboutUs_video_mask"></div>
+								<video src="" style="background:url(images/index/aboutUs_video3.jpg);background-size:cover; background-position: center center">
+								</video>
+							</div>
+							<span>3、视频</span>
+						</li>
+						<li>
+							<div class="index_aboutUs_video">
+								<img src="images/index/aboutUs_video_play.png" alt="">
+								<div class="index_aboutUs_video_mask"></div>
+								<video src="" style="background:url(images/index/aboutUs_video4.jpg);background-size:cover; background-position: center center">
+								</video>
+							</div>
+							<span>4、视频</span>
+						</li>
+					</ul>
+					</div>
+			</div>
+			<footer>
+					<ul>
+						<li>使用条款</li>
+						<li>版权声明</li>
+						<li>隐私政策</li>
+					</ul>
+					<div class="index_lastScreen_bottom">
+						<span>版权所有 © 2016 上海威墨信息科技有限公司&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp备案©京工CP备15004316号cznn
+						</span>
+						<a href="" class="sinaBlog">
+							<i class="iconfont icon-weibo"></i>
+							新浪微博
+						</a>
+						<a href="" class="weChat">
+							<i class="iconfont icon-weixin"></i>
+							微信公众号
+						</a>
+						<span class="telephone">
+							<i class="iconfont icon-dianhua"></i>
+							4000-10-10-10
+						</span>
+					</div>
+			</footer>
+		</div>
+	</div>
+
+	
+
+		
+		<script>
+			var logic = 'index.js';
+			var register = 'register.js';
+			
+			var script_logic ="<script type='text/javascript' src=" + scriptBaseUrl + logic + "><\/script>";
+			var script_register ="<script type='text/javascript' src=" + scriptBaseUrl + register + "><\/script>";
+			document.write(script_logic);
+			document.write(script_register);
+		</script>
+	</body>
+
+</html>

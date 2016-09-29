@@ -1,0 +1,277 @@
+﻿<krpano> <!-- BottomMenu by Umalo (anton.skorjanc@inet.hr) -->
+
+			<menu_settings menu_height="240"
+	               menu_width="240"
+	               menu_parent="skin_control_bar"
+	               menu_color_set="3"
+	               menu_color_text="text-align:left; font-family:Arial; color:#FFFFFF; font-weight:bold; font-size:14px;"
+	               menu_color_text_over="text-align:left; font-family:Arial; color:#FFD0A9; font-weight:bold; font-size:14px;"
+	               menu_item_background_alpha="0.7"
+	               menu_item_background_alpha_over="1"
+	               menu_slider_graphic_alpha="0.9"
+	               menu_itemheight="30"
+	               menu_itemdistance="5"
+	               menu_overscroll="0"
+	               menu_hoverscroll="false"
+	               menu_start_open="false"
+	               />
+	               
+				<!-- 
+					menu_parent="skin_control_bar"    -> If you use Krpano default GUI 
+					menu_parent=""										-> If you don't use Krpano default GUI. If no parent is set Menu is aligned to invisible line at the bottom. Additional button is placed on pano 
+					menu_parent="your_layer"					-> If you want to make menu child of other layer 
+		 		-->
+
+				<!--<menu_settings devices="mobile|tablet"
+						 menu_itemheight="40" 
+						 menu_itemdistance="5"
+						 menu_overscroll="0"
+						 menu_hoverscroll="false"
+	               />-->
+	
+			<style name="item_outer_style" keep="true" type="container" bgcolor="" bgalpha="" parent="menu_scroll" align="topleft" edge="topleft" x="0" height="10" width="10" visible="true" zorder="6" maskchildren="false" bgcapture="true" 
+					onclick="if(linkedscene,loadscene(get(linkedscene),null,MERGE,BLEND(1)); wait(0); menu_close(); );"
+					onover="change_text_color(get(textlayer),get(menu_settings.menu_color_text_over));tween(width,get(animated_width),0.2); tween(x,10,0.2);tween_border_and_inner_size(get(borderlayer),get(animated_width),get(innerlayer),get(animated_inner_layer_width));	if(scroll,tween_text_left(get(scroll_item),get(left_tween)););" ondown="" onup=  "" 
+					onout= "change_text_color(get(textlayer),get(menu_settings.menu_color_text));tween(width,get(default_width),0.2);tween(x,5,0.1);tween_border_and_inner_size(get(borderlayer),get(default_width),get(innerlayer),get(inner_layer_width));if(scroll,tween_text_normal(get(scroll_item)););" 		
+				/>	
+			<!--<style name="item_outer_style" devices="touchdevice" keep="true" type="container" bgcolor="" bgalpha="" parent="menu_scroll" align="topleft" edge="topleft" x="0" height="10" width="10" visible="true" zorder="6" maskchildren="false" bgcapture="true" 			
+					onclick="if(linkedscene,loadscene(get(linkedscene),null,MERGE,BLEND(1)); wait(0); menu_close(); );" onover="" onout= "" 
+					ondown="change_text_color(get(textlayer),get(menu_settings.menu_color_text_over));tween(width,get(animated_width),0.2); tween(x,10,0.2); tween_border_and_inner_size(get(borderlayer),get(animated_width),get(innerlayer),get(animated_inner_layer_width));	if(scroll,delayedcall(0.5,tween_text_left(get(scroll_item),get(left_tween));); );" 
+					onup="change_text_color(get(textlayer),get(menu_settings.menu_color_text));	tween(width,get(default_width),0.2);tween(x,5,0.1,default,if(scroll,tween_text_normal(get(scroll_item));););								tween_border_and_inner_size(get(borderlayer),get(default_width),get(innerlayer),get(inner_layer_width));	" 
+				/>		-->
+			<style name="item_inner_style" type="container" keep="true" bgcolor="0x000000" bgalpha="0.0" align="topleft" edge="topleft" x="5" y="0" height="0" width="0" visible="true" zorder="7" bgcapture="true" maskchildren="true" enabled="true" capture="false" />
+			<style name="item_text_style"  keep="true" url="%FIRSTXML%/plugins/textfield.swf" align="left" x="0" background="false" css="font-family:Arial; font-size:12px; color:#ffffff; text-align:left;  
+				font-weight:bold" html=""	enabled="false" capture="true" autowidth="true" 
+				 onautosized="" padding="0 0 0 0" vcenter="true" backgroundalpha="" shadowalpha="" autoheight="" /> 
+			<!--<style name="menu_thumbborder"  keep="true" url="menu_bottom/menu_item_border.png" visible="true" enabled="false" align="lefttop" scale="1" ox="0" oy="0" scale9grid="1|1|247|52"/>		-->
+		
+		
+			<layer name="menu_button" keep="true" url="menu_button_orange.png" visible="false" crop="0|0|64|64" align="rightbottom" x="10" y="10" scale="0.5" onclick="menu_toggle();" />				
+			<layer name="menu_line" keep="true" type="container" bgalpha="0" bgcolor="0x000000" width="100%" height="1" y="-1" maskchildren="false" bgcapture="true" handcursor="false" visible="true" 
+				onloaded="if(menu_settings.menu_parent,set(align,top);set(edge,top);set(oy,-1);set(parent,get(menu_settings.menu_parent));,set(align,bottom);set(edge,bottom);set(layer[menu_button].visible,true);set(layer[menu_btn_button].visible,false); );">
+					<layer name="menu_outer1" keep="true" type="container" bgalpha="0.0" bgcolor="0x000000" width="0" height="0" y="0" align="righttop" edge="righttop" maskchildren="true" ox="-50" oy="0" bgcapture="true" handcursor="false" state="closed" onloaded="set(width,get(menu_settings.menu_width));set(height,get(menu_settings.menu_height));copy(y,height);">		
+							<layer name="menu_outer2" type="container" bgalpha="0.5" bgcolor="0x000000" width="100%" height="100%" y="-100%" align="leftbottom"  >									
+								<layer name="menu_scrollindicator_border" type="container" bgcolor="0x000000" bgalpha="0" align="righttop" edge="righttop" x="4" y="4" height="100%" width="100%" visible="true" zorder="5" >
+									<layer name="vslider_bg" keep="true" scale9grid="0|10|25|10|25|10" align="topright" edge="topright" x="0" y="27" handcursor="false" zorder="1" visible="true"	 maskchildren="true">
+										<layer name="vslider_grip" keep="true" align="top" edge="top" parent="vslider_bg" zorder="2" x="0" ox="0" y="2" oy="0" dragging="if(pressed,sub(vdy, mouse.stagey, drag_stagey); add(newvy, drag_currenty, vdy); if(newvy LE vslider_bg_half_neg, 	copy(newvy,vslider_bg_half_neg);); if(newvy GE vslider_bg_half,copy(newvy,vslider_bg_half););copy(y,newvy); div(vval, newvy, layer[vslider_bg].pixelheight);update_scroll_menu();delayedcall(0,dragging()););" ondown="copy(drag_currenty,y); copy(drag_stagey,mouse.stagey); dragging();"/>
+									</layer>
+									<layer name="slider_up"	align="topright" onclick="" zorder="6" 	ondown="asyncloop(pressed, layer[menu_scroll].scrollby(0,+0.2));"	/>
+									<layer name="slider_dn" align="bottomright" onclick="" zorder="6" y="7"	ondown="asyncloop(pressed, layer[menu_scroll].scrollby(0,-0.2));"	/>						
+									<layer name="menu_scroll" url="%SWFPATH%/plugins/scrollarea.swf" alturl="%SWFPATH%/plugins/scrollarea.js" keep="true" mwheel="true" direction="v" overscroll="0" height="0" onscroll="menu_updatesliderscroll();" x="4" onloaded="set_menu_koeficients(); sub(new_width,menu_settings.menu_width,49);set(layer[menu_scroll].width,get(new_width)); delayedcall(0.1,distribute_manu_items2());" >
+								</layer>
+							</layer>
+						</layer>
+					</layer>
+			</layer>		
+		
+			<!--<krpano devices="flash">
+				<layer name="menu_line">
+					<layer name="menu_outer1">
+						<layer name="menu_outer2">
+							<layer name="menu_scrollindicator_border">
+								<layer name="vslider_bg">
+									<layer name="vslider_grip" devices="flash" parent="vslider_bg" keep="true" ox="-1"/>
+								</layer>
+							</layer>
+						</layer>
+					</layer>
+				</layer>
+		 	</krpano>-->
+				
+	
+	<!-- Menu actions -->
+			<action name="menu_updatesliderscroll">		
+				set(padding,3);if(toverflow GE 0,if(boverflow GE 0,mul(iw,slider_koeficient,toverflow); add(iw,padding);copy(layer[vslider_grip].y,iw);,set(layer[vslider_grip].y,get(menu_grip_path2)););,set(layer[vslider_grip].y,3); );		  
+			</action>
+	
+			<action name="update_scroll_menu">			
+					layer[menu_scroll].stopscrolling(); sub(new_area_y,get(layer[vslider_grip].y),3);mul(new_area_y,scroll_koeficijent); copy(layer[menu_scroll].y,new_area_y);
+			</action>
+			
+		 	<!-- 底部菜单自动下滑隐藏-->
+			<!--<action name="menu_close">
+				copy(menu_height,menu_settings.menu_height);mul(menu_height_neg,menu_height,-1); tween(layer[menu_outer2].y, get(menu_height_neg), distance(get(menu_height),0.5), default, set(layer[menu_outer2].state,'closed');wait(0);set(layer[menu_outer1].y, get(menu_height)););
+			</action>-->
+		
+			<action name="set_menu_koeficients">
+			<!-- Scale9grid slider background -->
+				set(menu_bcg_height,get(menu_settings.menu_height)); sub(menu_bcg_height,61); set(layer[vslider_bg].height,get(menu_bcg_height));					
+				
+				<!-- slider grip path-->			
+				sub(menu_grip_path,menu_bcg_height,87); mul(menu_grip_path_neg,menu_grip_path,-1);	
+				
+				<!-- slider grip path2-->
+				add(menu_grip_path2,menu_grip_path,3); set(vslider_bg_half,get(menu_grip_path2)); set(vslider_bg_half_neg,3);					
+				set(menu_items_offset,get(menu_settings.menu_itemheight)); add(menu_items_offset,get(menu_settings.menu_itemdistance));
+						
+				<!-- Set menu scroll  height -->
+				set(menu_scroll_height,get(menu_items_offset)); mul(menu_scroll_height,menu_items_offset,group[menu].group.count); 
+				sub(menu_scroll_height,get(menu_settings.menu_itemdistance)); 			<!-- One distance less -->				
+				add(menu_scroll_height,get(layer[menu_scrollindicator_border].y)); 	<!-- One for top offset -->
+				add(menu_scroll_height,get(layer[menu_scrollindicator_border].y)); 	<!-- One for bottom offset -->
+				add(menu_scroll_height,1); 																					<!-- bottom offset 1 higher than upper -->		
+				copy(layer[menu_scroll].height,menu_scroll_height);
+										
+				<!-- Set sliding koeficient -->
+				sub(scroll_boverflow,menu_scroll_height,menu_settings.menu_height);	div(slider_koeficient,menu_grip_path,scroll_boverflow);			
+				
+				<!-- Set scroll koeficient -->	
+				div(scroll_koeficijent,scroll_boverflow,menu_grip_path_neg);
+			</action>
+			
+			<!--点击底部按钮，弹出菜单，再点击关闭-->
+			<action name="menu_toggle">
+				copy(menu_height,menu_settings.menu_height);mul(menu_height_neg,menu_height,-1);
+				if(layer[menu_outer2].state == 'opened',tween(layer[menu_outer2].y, get(menu_height_neg), distance(get(menu_height),0.5), default, set(layer[menu_outer2].state,'closed');set(layer[menu_outer1].y, get(menu_height)););, set(layer[menu_outer1].y, get(menu_height_neg));		-->
+				
+				<!-- If vtourskin is included than you might want to close thimbs when clicked on Menu button -->
+				<!-- Remove if you don't want to hide thumbs if default gui used -->
+				if(layer[skin_control_bar],skin_showthumbs(false);); 
+				set(layer[menu_outer2].state,'opened');tween(layer[menu_outer2].y, 0, distance(get(menu_height),0.5), default,ifnot(menu_scroll_attrib_set,delayedcall(0.2,check_size_add_attrib);set(menu_scroll_attrib_set,true); ); ); 
+				);
+			</action>
+				
+			<action name="distribute_manu_items2">
+				<!-- Set menu slider, arrows, gripp graphic based on color set from settings  -->		
+				txtadd(url_up,'menu_bottom/slider_up_',get(menu_settings.menu_color_set),'.png');set(layer[slider_up].url,get(url_up));		set(layer[slider_up].alpha,get(menu_settings.menu_slider_graphic_alpha));
+				txtadd(url_dn,'menu_bottom/slider_dn_',get(menu_settings.menu_color_set),'.png');set(layer[slider_dn].url,get(url_dn));   set(layer[slider_dn].alpha,get(menu_settings.menu_slider_graphic_alpha));
+				txtadd(url_slider,'menu_bottom/slider_grip_',get(menu_settings.menu_color_set),'.png');	set(layer[vslider_grip].url,get(url_slider)); set(layer[vslider_grip].alpha,get(menu_settings.menu_slider_graphic_alpha));
+				txtadd(url_bcg,'menu_bottom/slider_bcg_',get(menu_settings.menu_color_set),'.png');	set(layer[vslider_bg].url,get(url_bcg));    set(layer[vslider_bg].alpha,get(menu_settings.menu_slider_graphic_alpha));
+							
+				<!-- Menu autoscroll -->
+				if(menu_settings.menu_hoverscroll, ifnot(device.touchdevice, set(layer[menu_scroll].draggable, false));set(layer[menu_scroll].onhover_autoscrolling,true); );		
+				if(menu_settings.menu_overscroll, set(layer[menu_scroll].overscroll,get(menu_settings.menu_overscroll)); );		
+				
+				sub(new_item_width,menu_settings.menu_width,39); sub(new_item_animated_width,menu_settings.menu_width,49); inc(defaulut_item_width,menu_settings.menu_width,49);			
+											
+				<!-- Set y for menu items -->			
+				for(set(menu_item_y,1), menu_item_y LE group[menu].group.count, inc(menu_item_y),
+					
+					txtadd(menu_0_out,'menu_item_',get(menu_item_y),'_outer');
+					txtadd(menu_border,'menu_border_',get(menu_item_y));						
+					txtadd(menu_0_in,'menu_item_',get(menu_item_y),'_inner');
+					txtadd(menu_0_item,'menu_item_',get(menu_item_y),'_text');
+					txtadd(menu_item_2_change,'menu_item_',get(menu_item_y));						
+								
+					sub(menu_koef,menu_item_y,1);
+					mul(menu_new_y,menu_koef,menu_items_offset);
+					add(menu_new_y,1);
+					
+					addlayer(get(menu_0_out));			
+					layer[%menu_0_out].loadstyle('item_outer_style');						
+								
+					set(layer[%menu_0_out].width,get(new_item_width));
+					set(layer[%menu_0_out].height,get(menu_settings.menu_itemheight)); 
+								
+					set(layer[%menu_0_out].default_width,get(new_item_width));
+					set(layer[%menu_0_out].y,get(menu_new_y));
+					set(layer[%menu_0_out].x,5);			
+					
+					txtadd(bcg_color,'item_bcg_color_set_',get(menu_settings.menu_color_set));						
+					set(layer[%menu_0_out].bgcolor,get(group[menu_item_background].group[get(bcg_color)].value)); 						
+					set(layer[%menu_0_out].bgalpha,get(menu_settings.menu_item_background_alpha));			
+					set(layer[%menu_0_out].animated_width,get(new_item_animated_width));									
+					copy(layer[%menu_0_out].linkedscene,group[menu].group[get(menu_item_2_change)].linkedscene);
+					
+					<!-- border -->
+					addlayer(get(menu_border));
+					layer[%menu_border].loadstyle('menu_thumbborder');
+					set(layer[%menu_border].parent,get(menu_0_out));						
+					copy(layer[%menu_border].width,layer[%menu_0_out].width);						
+					copy(layer[%menu_border].height,menu_settings.menu_itemheight);			
+					set(layer[%menu_border].visible,true);
+					
+					<!-- set name of the border to tween width on outer border -->
+					set(layer[%menu_0_out].borderlayer,get(menu_border));			
+					
+					<!-- set name of the inner layer to tween width on outer -->
+					set(layer[%menu_0_out].innerlayer,get(menu_0_in));			
+					
+					<!-- set name of the text layer to change css -->			
+					set(layer[%menu_0_out].textlayer,get(menu_0_item));			
+					
+					addlayer(get(menu_0_in));
+					layer[%menu_0_in].loadstyle('item_inner_style');
+					set(layer[%menu_0_in].parent,get(menu_0_out));			
+					sub(inner_layer_height,menu_settings.menu_itemheight,0);
+					set(layer[%menu_0_in].height,get(inner_layer_height));
+					sub(inner_layer_width,new_item_width,10);
+					sub(animated_inner_layer_width,inner_layer_width,10);
+					set(layer[%menu_0_in].width,get(inner_layer_width));
+					
+					addlayer(get(menu_0_item));
+					layer[%menu_0_item].loadstyle('item_text_style');			
+					set(layer[%menu_0_item].parent,get(menu_0_in));
+					set(layer[%menu_0_item].height,get(inner_layer_height));			
+					set(layer[%menu_0_item].y,0);		
+					
+					txtadd(new_html,get(group[menu].group[get(menu_item_2_change)].item_text));			
+					set(layer[%menu_0_item].html,get(new_html)); set(new_html,'');
+					
+					copy(layer[%menu_0_item].html,group[menu].group[get(menu_item_2_change)].item_text);
+					set(layer[%menu_0_item].css,get(menu_settings.menu_color_text));
+				);
+				
+				delayedcall(0.1,layer[menu_scroll].setcenter(0,0););
+				
+				<!-- Menu show on start based in menu settings -->
+				if(menu_settings.menu_start_open,menu_toggle(););
+			</action>
+			
+			<!--<action name="tween_text_left">				
+				tween(layer[%1].x,%2,distance(30,0.5),default,tween_text_normal(%1););
+			</action>-->
+			
+			<!--<action name="tween_border_and_inner_size">				
+				tween(layer[%1].width,%2,0.2); tween(layer[%3].width,%4,0.2);		
+			</action>-->
+			
+			<!--<action name="tween_text_normal">		
+				tween(layer[%1].x,0);			
+			</action>	
+			-->
+			<!--<action name="change_text_color">				
+				set(layer[%1].css,%2);
+			</action>		-->
+			
+			<!--<action name="check_size_add_attrib">		
+				for(set(i,1), i LE group[menu].group.count, inc(i),
+					txtadd(menu_0_item,'menu_item_',get(i),'_text'); 
+					txtadd(menu_0_out,'menu_item_',get(i),'_outer');	
+					if(layer[%menu_0_item].width GT inner_layer_width,			
+					sub(menu_item_left_tween,inner_layer_width,layer[%menu_0_item].width); 
+					sub(menu_item_left_tween,10); 
+					set(layer[%menu_0_out].scroll,true);
+					copy(layer[%menu_0_out].scroll_item,menu_0_item);
+					set(layer[%menu_0_out].left_tween,get(menu_item_left_tween));			
+					,			
+					set(layer[%menu_0_out].scroll,false);			
+					);			
+				);			
+			</action>-->
+		
+	<!-- End of Menu actions -->
+		
+	<!-- Define your Menu items and scenes to load when clicked -->
+	
+		<group name="menu">
+			 <group name="menu_item_1"  item_text="&#x00A0;• Menu item #01" linkedscene="scene_01" onclick="skin_view_littleplanet()" 
+			 	 showif="view.vlookatrange == 180" separator="true" />      
+			 <group name="menu_item_2"  item_text="&#x00A0;• Menu item #02	long menu item name" linkedscene="scene_02"  />      
+			 <group name="menu_item_3"  item_text="&#x00A0;• Menu item #03" linkedscene="scene_03"  />    
+			 <group name="menu_item_4"  item_text="&#x00A0;• Menu item #04" linkedscene="scene_04"  />      
+			 <group name="menu_item_5"  item_text="&#x00A0;• Menu item #05	even longer item name" 	linkedscene="scene_05"  />      
+			 <group name="menu_item_6"  item_text="&#x00A0;• Menu item #06" linkedscene="scene_06"  />    		
+			 <group name="menu_item_7"  item_text="&#x00A0;• Menu item #07" linkedscene="scene_07"  />    
+		</group>                                                                                               
+		                                                                                                       
+		<group name="menu_item_background">                                                                    
+			<group name="item_bcg_color_set_1"  value="0x7b7b7b" />                                              
+			<group name="item_bcg_color_set_2"  value="0x90B6DB" />                                              
+			<group name="item_bcg_color_set_3"  value="0xf19434" />                                              
+			<group name="item_bcg_color_set_4"  value="0x632e2e" />                                              
+			<group name="item_bcg_color_set_5"  value="0xFFFFFF" />      
+			<group name="item_bcg_color_set_6"  value="0x375b5b" />      	
+		</group>
+		     
+</krpano>		

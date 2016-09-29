@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+   <head>
+		<meta charset="UTF-8">
+	   <link rel="stylesheet" href="Content/css/register.css">
+		<title>注册</title>
+	   <script src="App/js/DevConfig.js"></script>
+   </head>
+	<body>
+		<section>
+			<div class="register">
+				<img src="Content/images/register/close.jpg" class="close_button" id="close_button" />
+				<h3 class="register_title">欢迎下载vidahouse客户端</h3>
+				<form class="user_information" id="commentForm" method="get" action="">
+					<div class="user_name">
+						<input type="text" id="user_name" class="input_name" placeholder="账号" name="name" minlength="2" required/>
+					</div>
+					
+					<div class="user_psw">
+						<input type="text" id="password" class="input_psw" name="password" placeholder="密码"/>
+					</div>
+					
+					<div class="user_psw_sure">
+						<input type="password" id="user_psw_sure" class="input_psw_sure" placeholder="请确认密码" name="confirm_password" />
+					</div>
+
+					<div class="user_tel">
+						<input type="text" id="user_tel" class="input_tel" placeholder="手机号 " name="user_tel" />
+						<div class="region_select">
+						<select name="tel_select">
+								<option value="0086">中国 +86</option>
+								<option value="00886">台湾 +886</option>
+								<option value="00852">香港 +852</option>
+								<option value="0060">马来西亚 +60</option>
+								<option value="0065">新加坡 +65</option>
+								<option value="0081">日本 +81</option>
+								<option value="0082">韩国 +82</option>
+								<option value="001">美国 +1</option>
+								<option value="001">加拿大 +1</option>
+								<option value="0061">澳大利亚 +61</option>
+								<option value="0064">新西兰 +64</option>
+								<option value="00971">阿联酋 +971</option>
+								<option value="00244">安哥拉 +244</option>
+								<option value="00853">澳门 +853</option>
+								<option value="0055">巴西 +55</option>
+								<option value="0045">丹麦 +45</option>
+								<option value="0049">德国 +49</option>
+								<option value="007">俄罗斯 +7</option>
+								<option value="0033">法国 +33</option>
+								<option value="0063">菲律宾 +63</option>
+								<option value="00358">芬兰 +358</option>
+								<option value="0031">荷兰 +31</option>
+								<option value="00420">捷克 +420</option>
+								<option value="0041">瑞士 +41</option>
+								<option value="0046">瑞典 +46</option>
+								<option value="0066">泰国 +66</option>
+								<option value="0058">委内瑞拉 +58</option>
+								<option value="0034">西班牙 +34</option>
+								<option value="0039">意大利 +39</option>
+								<option value="0091">印度 +91</option>
+								<option value="0062">印度尼西亚 +62</option>
+								<option value="0044">英国 +44</option>
+								<option value="0084">越南 +84</option>
+						</select>
+					  </div>
+						
+					</div>
+					
+					
+					
+					<div class="auth_code">
+						<input type="text" id="write_auth_code" class="write_auth_code" name="write_auth_code"/>
+						<input type="button" id="getting_code" value="获取验证码" class="getting_code" name="get_code">  
+					</div>
+				</form>
+				<div class="button_register" id="button_register">
+						下载
+			    </div>
+			</div>
+		</section>
+		<script>
+			var logic = 'register.js';
+			var script = "<script type='text/javascript' src=" + scriptBaseUrl + logic + "><\/script>";
+			document.write(script);
+		</script>
+</body>
+
+</html>

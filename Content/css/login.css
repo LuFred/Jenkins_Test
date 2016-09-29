@@ -1,0 +1,108 @@
+		
+		.login {
+				width: 475px;
+				height: 558px;
+				background: #d3d3d2;
+				border-radius: 10px 10px;
+				margin: 0 auto;
+				/*opacity: 0.5;*/
+			}
+			
+          .login_title{
+	           	height: 104px;
+	           	text-align: center;
+	           	line-height: 104px;
+           }
+           
+         .user_psw_login,.user_name_login{
+			  	display: block;
+			  	-webkit-appearance: none;
+			  	border:none;
+			  	outline: none;
+			    background: #d3d3d2;
+				border: 1px solid #fff;
+	          	border-radius: 10px 10px;
+	          	margin:0 auto 25px;
+	          	width:334px;
+				height: 43px;
+			}
+			
+			.rember_psw{
+				width:334px;
+				margin:0 auto 27px;
+			}
+			
+            .forget_psw{
+            	margin-left: 155px;
+            	cursor: pointer;
+            }
+            
+            .forget_psw:hover{
+            	color: #A3A3A3;
+            }
+            
+            .button_login{
+            	cursor: pointer;
+				width: 336px;
+				height: 40px;
+	        	background: #535353;
+	        	margin: auto;
+	        	border-radius: 10px 10px;
+	        	text-align: center;
+	        	line-height: 40px;
+	        	color: white;
+            }
+             
+            .more_way_login_hint{
+            	padding: 38px 0 20px 20px;
+            	width: 316px;
+            	margin: auto;
+            	
+            }
+            
+            .more_way_login_hint div{
+            	width: 60px;
+            	height: 1px;
+            	background: white;
+            	float: left;
+            }
+            
+            .more_way_login_hint p{
+            	margin: -10px 25px 0;
+            	float: left;
+            }
+            
+            .more_way_login_entery{
+            	width: 336px;
+            	margin: auto;
+            }
+            .more_way_login_entery img{
+            	cursor: pointer;
+            }
+            
+            .qq_img{
+            	margin-right:134px;
+            	margin-left: 20px;
+            }
+            
+            .weibo_img{
+            	margin-right:59px ;
+            }
+            
+            .remind_register{
+            	width: 336px;
+            	margin: auto;
+            }
+            
+            
+            .remind_register p{
+            	margin-left: 45px;
+            }
+             .remind_register span{
+             	margin-left: 120px;
+             	cursor: pointer;
+             }
+            .remind_register span:hover{
+            	color:#A3A3A3 ;
+            }
+            

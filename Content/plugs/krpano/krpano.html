@@ -1,0 +1,287 @@
+﻿	<!DOCTYPE html>
+	<html>
+	<head>
+	    <title>krpano</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+
+        <script src="../../../App/js/lib/jquery-2.1.1.min.js"></script>
+		<style>
+				 body,html{
+					position: relative;
+				  }
+				  
+				  .txt{
+			     	  width:445px;
+			          height:550px;
+			          background: #000;
+			          margin: 0 auto;
+				      filter:alpha(opacity=60); 
+			          -moz-opacity:0.6; 
+			          opacity:0.6;
+		           }
+	           
+			         h2{font-size:30px;color:#fff;text-align:center;}
+			        .p1{color:#c3c3c3;text-align: center;}
+			        .text2{overflow: hidden;padding-top: 20px;}
+			         h1{text-align:center;font-size:20px;}
+			        
+		          .comment{
+						position:absolute;
+						right:10px;
+						bottom:162px;
+						width:36px;
+						height:36px;
+						background-image: url(skin_v6_1.png); 
+				        background-size: 405px 400px;
+				        background-position: 0 -326.222px;
+				        cursor: pointer;
+				      }
+					
+					#text{
+						  width:370px;
+					      height:80px;
+					      margin:10px auto;
+					      font-size: 16px;
+					      }
+					      
+				   .introduction{
+						position:absolute;
+						right:10px;
+						bottom:208px;
+						width:36px;
+						height:36px;
+						background-image: url(skin_v6_1.png); 
+				        background-size: 405px 400px;
+				        background-position: -72px -326.222px;
+				        cursor: pointer;
+					}
+					
+		            .share{
+						position:absolute;
+						right:10px;
+						bottom:254px;
+						width:36px;
+						height:36px;
+						background-image: url(skin_v6_1.png); 
+				        background-size: 405px 400px;
+				        background-position: -144px -326.222px;
+				        cursor: pointer;
+					 }
+					 
+				 .share:hover{
+				 	position:absolute;
+					right:10px;
+					bottom:254px;
+					width:240px;
+					height:240px;
+					background:url(../img/2.gif) no-repeat; 
+			        cursor: pointer;
+				  }
+					 
+				button{width:99px;height:36px;
+						background:#146e88;
+						border: none;
+						cursor: pointer;
+					}
+						
+				#mask{
+					position:fixed;
+					left:0;
+					right:0;
+					top:0;
+					bottom:0;
+				    background: #000;
+					opacity: 0.7;
+					display:none;
+					z-index:3000;
+				}
+						 
+			    @-ms-viewport { width:device-width;}
+				@media only screen and (min-device-width:800px) { html {overflow:hidden;}}
+				html { height:100%; }
+				body { height:100%; overflow:hidden; margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; 
+				font-size:16px; background-color:#000000;color: #fff;}
+			
+		</style>
+		</head>
+		<body>
+		
+	   <script src="krpano.js"></script>
+	 	<div id="pano" style="width:100%;height:100%;">
+			<noscript>
+				<table style="width:100%;height:100%;">
+					<tr style="vertical-align:middle;text-align:center;">
+						<td>ERROR:<br><br>Javascript not activated<br><br></td>
+					</tr>
+			   </table>
+			</noscript>
+			<script>
+	         //使用krpano的基本配置：初始化配置
+				embedpano({swf:"krpano.swf",xml:"krpano.xml", target:"pano", html5:"auto", mobilescale:1.0, passQueryParameters:true});
+			</script>
+		  
+	    </div>
+	
+		<!--<div id="dingwei">
+		  	<div align="center" >
+		  	<img id="img" src="../Vidahouse-English/img/banner01.png"  height="100%" width="100%" 
+	           onclick="javascript:dingwei.style.visibility = 'hidden';pano.style.visibility = 'visible';"/> 
+		</div>
+	    </div>-->
+	    
+	     <div class="comment gif"></div>
+	     
+	     <div id="comment" 
+	     	style="position:absolute;
+	     	right:40%;
+			bottom:50%;
+		    z-index: 3001;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    width: 400px;
+		    height: 180px;
+		    display: none;
+		    background:#000;
+		    opacity:0.7;"
+		    >
+		    
+		  <p style="margin:10px 0 0 42px">我來說說</p>
+		  <div id="text">
+		    <textarea type="text" placeholder="有什么想对我们说的吗？"
+			  		style="width:370px;
+				    height: 80px;
+				    resize:none;
+				    border: none;
+				    color: #333;">
+				   </textarea>
+			  	<button id="sure" type="button"  style="margin-left:140px;">确定</button>
+	  		 	<button id="cancel"  type="button">取消</button>
+		   </div>
+	     </div>
+	    
+	     <div class="introduction gif"></div>
+	    
+	    <div id="introduction"
+	    	style="position:absolute;
+	     	right:40%;
+			bottom:50%;
+		    z-index: 3001;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    opacity: 0.6;
+		    width: 400px;
+		    height: 180px;
+		    display: none;
+		    background:#000;" >
+		    
+	        <h2 class="title">vidahouse介绍</h2>
+			<p class="p1">我们的技术及资源可以让用户做的事是：</p>
+			<p>电脑人工智慧，将房型图自动生成三维模型。一分钟完成毛胚房三维建制。
+			玩家生活研发的设计 dna系统，可以将设计秒变成各种优秀方案，效率奇高。</p>
+			<div id="close_intro" style="height:30px;width:30px;
+				text-align: center;
+				color: #666;
+				font-size: 12px;
+				line-height: 30px;
+				background:#fff;border-radius:50% 50%;
+				position: absolute;
+				top:-15px;
+				right:-15px;">关闭</div>
+			</div>
+				
+	    <div class="share gif"> </div>
+	    
+	     <div id="share"
+	     	style="position:absolute;
+	     	right:40%;
+			bottom:30%;
+		    z-index: 3001;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    opacity: 0.9;
+		    width: 500px;
+		    height: 422px;
+		    display:none;
+		    background:#fff;
+		    text-align: center;">
+		    
+		    <p style="text-align:center;color:#000;line-height:30px;
+		    	margin-bottom: 30px; border-bottom: 1px dotted #81807F;
+		    	position: relative;">关注我们分享到你的朋友圈吧</p>
+		    <img id="close" src="close_grey.png" style="position:absolute;top:-18px;right:-18px;width:36px;height:36px" />
+	    	<img src="erweima.jpg" />
+	     </div>
+	     
+	     <div id="mask"></div>
+	    </body>
+		</html>
+	      <script>
+   
+			function show(obj){
+				if(obj.style.display=="none"){
+					obj.style.display="block";
+				  }
+				else{
+					obj.style.display="none";
+				}
+			 }
+				var comment_button=document.getElementById("comment");
+		    	var comment=document.getElementsByClassName("comment")[0];
+		    	var cancel=document.getElementById("cancel");
+		    	var textarea=document.getElementsByTagName("textarea")[0];
+		    	var mask=document.getElementById("mask"); 
+		    	
+		        comment_button.onclick=function(){
+			    		show(comment);
+			    		mask.style.display="block";
+	                    textarea.value="";
+		           }
+		         
+		         cancel.onclick=function(){
+		         	show(mask);
+		         	textarea.value="";
+		         	this.parentNode.parentNode.style.display="none";
+		         }
+	
+	             var introduction_button=document.getElementById("introduction");
+		    	 var introduction=document.getElementsByClassName("introduction")[0];
+		    	 var close_intro=document.getElementById("close_intro");
+		    	
+		         introduction_button.onclick=function(){
+			    		show(introduction);
+			    		mask.style.display="block";
+			    	}
+		         
+		         close_intro.onclick=function(){
+		         	this.parentNode.style.display="none";
+		         	show(mask);
+		         }
+			    	var share_button=document.getElementById("share");
+		    	    var share=document.getElementsByClassName("share")[0];
+		    	    var close=document.getElementById("close"); 
+		    	   
+		       		share_button.onclick=function(){
+			    		show(share);
+			    		mask.style.display="block"
+			    		close.onclick=function(){
+		           		this.parentNode.style.display="none"
+		           		mask.style.display="none"
+		           		}
+			    	}
+		       		
+           //	 鼠标划入事件
+//         var changeTogif=$(".gif");
+//         for(var i=0;i<changeTogif.length;i++){
+//	           	 $(changeTogif[i]).hover(function(){
+//          	 console.log(i);
+//          	 $(this).removeClass("share");
+//		           $(this).css({"background-image":"url(../img/1.gif)","width":"100px","height":"100px"})
+//		          	},function(){
+//		            $(this).addClass("share");
+//		          })
+//		      } 		
+	    </script>

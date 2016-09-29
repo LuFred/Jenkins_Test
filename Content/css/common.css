@@ -1,0 +1,115 @@
+		* {
+			padding: 0;
+			margin: 0;
+		 }
+		
+		img {
+			border: none;
+		}
+		
+		ul li {
+			list-style: none;
+		}
+		
+		a {
+			text-decoration: none;
+			color: #fff;
+		}
+		
+		body,
+		html {
+			font-size: 16px;
+			width: 100%;
+			/*min-width:1344px;*/
+			overflow-x: hidden;
+			font-family: "微软雅黑";
+		}
+		
+		.clearfix::before {
+			content: " ";
+			display: table;
+		}
+		
+		.clearfix::after {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+		
+		.top {
+			width: 100%;
+			max-width: 1920px;
+			position: relative;
+			max-height: 962px;
+		}
+		
+		.top>img {
+			width: 100%;
+		}
+		
+		/* 导航部分*/
+		
+		.mask {
+			width: 100%;
+			padding: 61px 0;
+			background: #595e5b;
+			opacity: 0.3;
+			filter: alpha(opacity=50);
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		
+		.nav {
+			width: 100%;
+		    position: absolute;
+			top: 0;
+			left: 0;
+		}
+		
+		#nav {
+			max-width: 1162px;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		
+		.small-logo {
+			float: left;
+			margin-left: 14px;
+			text-align: center;
+			line-height: 122px;
+			color: #fff;
+			font-size: 28px;
+			font-weight: bold;
+		}
+		
+		.ulist {
+			float: left;
+		}
+		
+		.ulist>li {
+			text-align: center;
+			line-height: 122px;
+			float: left;
+			margin-right: 33px;
+			cursor: pointer;
+			font-size: 15px;
+		}
+		
+		.span-list {
+			float: left;
+			padding: 40px 0;
+		}
+		
+		.span-list>span {
+			color: #fff;
+			margin-right: 16px;
+			float: left;
+		}
+		
+		
+		.login,.register{
+			cursor: pointer;
+		}
+		

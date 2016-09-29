@@ -1,0 +1,582 @@
+	
+	<krpano onstart="startup();">
+		<include url="%SWFPATH%/plugins/showtext.xml" />
+		
+		<!--<include url="vtourskin.xml"/>-->
+		
+		<include url="vtourskin02.xml"/>	
+		
+		<!--<include url="menu_bottom.xml"/>-->
+	
+	
+		<autorotate enabled="true" waittime="2.0" accel="0.5" speed="1" horizon="0" tofov="90.0" />
+	
+		<!--任何场景都要调用这段代码，否则场景的内容没效果-->
+		<action name="startup" autorun="onstart">
+			if(startscene === null, set(startscene,get(scene[0].name)) );
+			loadscene(get(startscene),null,MERGE);
+			addthumbs();
+		</action>
+		
+		
+  		<!--场景跳换时的变化-->
+		<action name="transition">
+			<!-- move the hotspot to the destination position -->
+			<!--tween(hotspot[%1].alpha, 0.0, 0.25, default);
+			tween(hotspot[%1].rotate, %4, 0.25, default);
+			tween(hotspot[%1].ath,  %2, 0.25, default);
+			tween(hotspot[%1].atv,  %3, 0.25, default, WAIT);-->
+	
+			<!-- look at the hotspot position -->
+			looktohotspot(%10);
+	
+			set(plugin[loading].visible,true);
+	
+			<!-- load and blend to the new scene -->
+			loadscene(%5, null, MERGE, BLEND(2));
+	
+			<!-- save the startup view position of the scene-->
+			copy(startview_hlookat, view.hlookat);
+			copy(startview_vlookat, view.vlookat);
+			copy(startview_fov, view.fov);
+	
+			<!-- look at the given position and wait for blending -->
+			<!--lookat(%6, %7, %8);-->
+			wait(LOAD);
+            set(plugin[loading].visible,false);
+	        wait(BLEND);
+	
+			<!-- return to startup position -->
+			<!--oninterrupt(break);-->
+			lookto(get(startview_hlookat), get(startview_vlookat), get(startview_fov), smooth(0,-60,180));
+	
+		</action>
+	
+		<!-- thumbs -->
+		<!--点击动态圆圈事件-->
+		<!--<layer name="thumbs" keep="true" type="container" align="leftbottom" width="100%" x="0" y="0" state="open">
+	          <layer name="thumbsicon" 
+				style="new_spotd1_gif"
+				url="spotd4_gif.png"
+				align="leftbottom"
+				x="0" y="0" 
+				edge="leftbottom"
+				scale.mobile="0.75"
+				scale="0.4"
+				onclick="if(layer[thumbs].state == 'open', tween(layer[thumbs].y,100,1,easeOutQuint), tween(layer[thumbs].y,0,1,easeOutQuint));
+			    switch(layer[thumbs].state,'open','closed');" />
+	
+			 <layer name="thumbbar" keep="true" type="container" align="leftbottom" 
+				width="100%" height="100" x="0" y="-100" bgcolor="c3c3c3" bgalpha="0.2">
+				<layer name="scrollarea" url.flash="%SWFPATH%/plugins/scrollarea.swf"
+				url.html5="%SWFPATH%/plugins/scrollarea.js" align="center" width="10" height="100%" direction="v"
+				onloaded="setcenter(0,0);" />
+			</layer>
+		</layer>-->
+
+
+		<!--<action name="addthumbs">
+			calc(layer[ ].width, scene.count*90 + 100);
+			for(set(i,0), i LT scene.count, inc(i),
+			calc(thumbname,'thumb_' + i);
+			addlayer(get(thumbname));
+			copy(layer[get(thumbname)].url, scene[get(i)].thumburl);
+			set(layer[get(thumbname)].keep, true);
+			set(layer[get(thumbname)].parent, 'scrollarea');
+			set(layer[get(thumbname)].align, lefttop);
+			set(layer[get(thumbname)].y, 10 );
+			calc(layer[get(thumbname)].x,i*90+10);
+			set(layer[get(thumbname)].linkedscene, get(scene[get(i)].name) );
+			set(layer[get(thumbname)].onclick, tween(layer[thumbs].x,0,0.2,easeOutQuint,wait);
+			set(layer[thumbs].state,'closed'); loadscene(get(linkedscene), null, MERGE, BLEND(0.3)); );
+			)
+		</action>
+     -->
+     
+     	<!--实现热点拖拽-->
+		<action name="draghotspot">
+			spheretoscreen(ath, atv, hotspotcenterx, hotspotcentery, '1');
+			sub(drag_adjustx, mouse.stagex, hotspotcenterx);
+			sub(drag_adjusty, mouse.stagey, hotspotcentery);
+			asyncloop(pressed,
+			sub(dx, mouse.stagex, drag_adjustx);
+			sub(dy, mouse.stagey, drag_adjusty);
+			screentosphere(dx, dy, ath, atv);
+			print_hotspot_pos();
+			);
+		</action>
+	
+	 	<!--固定的文字提示-->
+		<style name="title_text"  url="%SWFPATH%/plugins/textfield.swf"
+			enabled="false" border="false" background="false"
+			align="top" x="0" y="40" width="400"
+			css="text-align:center;color:#000;opacity:0.25;font-family:Arial;
+			 font-weight:bold; font-style:italic; font-size:50px;
+			 text-shadow: 5px 5px 150px white;
+		     box-shadow: inset 10px 10px 180px 0px white;"
+			/>
+
+		<!-- 动态热点函数-->
+			<style name="new_spotd1_gif"
+				url="new_spotd1_gif.png"
+				crop="0|0|128|128"
+				framewidth="128" frameheight="128" frame="0" lastframe="24"
+				onloaded="hotspot_animate();"
+			  />
+			
+			<action name="hotspot_animate">
+				inc(frame,1,get(lastframe),0);
+				mul(ypos,frame,frameheight);
+				txtadd(crop,'0|',get(ypos),'|',get(framewidth),'|',get(frameheight));
+				delayedcall(0.04, if(loaded, hotspot_animate() ) );
+			</action>
+		
+          <!--热点图片始终显示文字的函数-->
+		  	<action name="add_all_the_time_tooltip">
+		        txtadd(tooltipname, 'tooltip_', get(name));
+				addplugin(get(tooltipname));
+				txtadd(plugin[get(tooltipname)].parent, 'hotspot[', get(name), ']');
+				set(plugin[get(tooltipname)].url,'%SWFPATH%/plugins/textfield.swf');
+				set(plugin[get(tooltipname)].align,center);
+				set(plugin[get(tooltipname)].edge,center);
+				set(plugin[get(tooltipname)].x,0);
+				set(plugin[get(tooltipname)].y,0);
+				set(plugin[get(tooltipname)].autowidth,true);
+				set(plugin[get(tooltipname)].autoheight,true);
+				set(plugin[get(tooltipname)].vcenter,true);
+				set(plugin[get(tooltipname)].background,true);
+				set(plugin[get(tooltipname)].backgroundcolor,0x000000);
+				set(plugin[get(tooltipname)].roundedge,5);
+				set(plugin[get(tooltipname)].backgroundalpha,0.65);
+				set(plugin[get(tooltipname)].padding,5);
+				set(plugin[get(tooltipname)].border,false);
+				set(plugin[get(tooltipname)].glow,0);
+				set(plugin[get(tooltipname)].glowcolor,0xFFFFFF);
+				set(plugin[get(tooltipname)].css,'text-align:center; color:#fff; font-family:MicrosoftYahei;font-size:20px;');
+				if(device.mobile,set(plugin[get(tooltipname)].css,'text-align:center; color:#FFFFFF; font-family:MicrosoftYahei; font-weight:bold; font-size:24px;');
+				);
+				set(plugin[get(tooltipname)].textshadow,0);
+				set(plugin[get(tooltipname)].textshadowrange,6.0);
+				set(plugin[get(tooltipname)].textshadowangle,90);
+				if(text == '' OR text === null,
+				copy(plugin[get(tooltipname)].html,scene[get(linkedscene)].title),
+				copy(plugin[get(tooltipname)].html,text)
+				);
+				set(plugin[get(tooltipname)].enabled,false);
+			</action>
+		
+		
+	 <!-- 场景一-->
+		<scene name="drawing_room" title="欧式风格" onstart="" thumburl="scene01.jpg" firsttime="true" >
+		
+		<!--热点坐标变化提示-->
+		<!--<plugin name="hotspot_pos_info"
+			url="%SWFPATH%/plugins/textfield.swf"
+			html="drag the hotspots..."
+			css="font-family:Courier;"
+			padding="8"
+			align="lefttop" x="10" y="10"
+			width="200"
+			enabled="false"
+			/>-->
+		
+		<action name="print_hotspot_pos"><![CDATA[
+			copy(print_ath, ath);
+			copy(print_atv, atv);
+			roundval(print_ath, 3);
+			roundval(print_atv, 3);
+			calc(plugin[hotspot_pos_info].html, '&lt;hotspot name="' + name + '"[br]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...[br]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ath="' + print_ath + '"[br]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atv="' + print_atv + '"[br]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...[br]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;');
+			]]>
+		</action>
+
+		<!--插入音乐-->
+	    <!--<plugin name="snd" url="soundonoff.png" align="leftbottom" x="50" y="10" alpha="0.25" scale="0.5" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+			crop="0|0|50|50"
+			onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+		  />
+	    <plugin name="soundinterface"
+				url.flash="%SWFPATH%/plugins/soundinterface.swf"
+				url.html5="%SWFPATH%/plugins/soundinterface.js"
+				rootpath=""
+				preload="true"
+				keep="true"
+			/>
+		
+		<events name="currentpano"
+			onnewpano="playsound(bgsnd, 'http://krpano.com/panos/xmas/ding_dong_merrily_on_high.mp3|http://krpano.com/panos/xmas/ding_dong_merrily_on_high.ogg', 0);"
+			onremovepano="stopsound(bgsnd);"/>-->
+		
+		
+			<layer name="vidahouse"
+				 style="title_text"
+				 html.desktop="Vidahouse"
+			  />
+			
+		
+		
+		<view hlookat="180" vlookat="10" fovtype="MFOV" fov="120" fovmin="50" fovmax="120" />
+		
+		<image>
+			<sphere url="1.jpg"/>
+		</image>
+		
+		<!--启动画面-->
+		<layer name="test" url="mouseAlert.png" align="center"
+		 
+			alpha="0" visible="true"
+			 
+			onclick="tween(alpha,0);delayedcall(0.5,set(visible,false));"
+			 
+			onloaded="picture_resize(get(name));" />
+			 
+			 
+			<events name="picture_period"
+			 
+				onpreviewcomplete="
+				 
+				set(layer[test].visible,false);
+				 
+				tween(layer[test].alpha,1);
+				 
+				delayedcall(4,tween(layer[test].alpha,0);delayedcall(0.5,set(layer[test].visible,false)));
+		    "/>
+				
+		
+		    <hotspot name="spot1"
+				style="new_spotd1_gif"
+				url="new_spotd1_gif.png"
+				scale="0.4"
+				ath="-135"
+				atv="-2"
+				zoom="true"
+				ondown="draghotspot();"
+				onhover="showtext(进入,STYLE3)"
+				onclick="transition(spot1,77.0, 2.6, 0, drawing_room02, 347, 7, 63);" 
+				linkedscene="drawing_room02;"
+				>
+			</hotspot>
+	
+			<!--文本的样式-->
+				<textstyle name="STYLE2"
+					font="Arial"
+					fontsize="20"
+					bold="false"
+					width="100%"
+					height="100%"
+					padding="20"
+					vcenter="true"
+					border="false"
+					background="true"
+					backgroundcolor="0x000000"
+					backgroundalpha="0.75"
+					origin="center"
+					edge="center"
+					textalign="left"
+					xoffset="0"
+					yoffset="0"
+					fadeintime="0.25"
+					fadetime="0.25"
+					css="color:#fff;"
+			  	/>
+
+                <textstyle name="STYLE3"
+		           font="Arial" fontsize.no-mobile="20" fontsize.mobile="28" bold="true" italic="true"
+		           background="true" backgroundcolor="0x333333" backgroundalpha="0.5"
+		           border="false"
+		           textcolor="0xFFFFFF"
+		           padding="6 12"
+		           roundedge="2"
+		           origin="cursor"
+		           edge="bottom"
+		           textalign="none"
+		           xoffset="0"
+		           yoffset.no-touch="-5"
+		           yoffset.touch="-40"
+          		 />
+
+                
+
+		<!-- 点击热点图片,出现指定图片    -->
+		
+		<!--<hotspot name="skin_control_help"
+			keep="true"
+			url="../button01.jpg"
+			align="left"
+			scale="0.5"
+			ath="177"
+			atv="5"
+			onclick="if([help].visible,
+			tween(hotspot[help].alpha,0);
+			delayedcall(0.5,set(hotspot[help].visible,false)),
+			set(hotspot[help].visible,true);tween(hotspot[help].alpha,1))"
+			/>
+
+		<hotspot name="help"
+			alpha="0"
+			url="../button02.jpg"
+			keep="true"
+			ath="-175"
+			atv="15"
+			align="center"
+			visible="false"
+			onclick="tween(alpha,0);
+			delayedcall(0.5,set(visible,false))
+			"/>
+		-->
+
+		<!-- 划入热点图片,出现指定文本    -->
+			<hotspot name="intro"
+				url="hot_background.png"
+				ath="-154"
+				atv="3.7"
+				scale="0.2"
+				handcursor="true"
+				text="see it"
+				onloaded="add_all_the_time_tooltip()"
+				onhover="showtext([div class=txt][img src=01.gif]
+				[h2 class=title]vidahouse介绍[/h2]
+				[p class=p1]我们的技术及资源可以让用户做的事是：[/p]
+				[p]电脑人工智慧，将房型图自动生成三维模型。一分钟完成毛胚房三维建制。
+				玩家生活研发的设计 dna系统，可以将设计秒变成各种优秀方案，效率奇高。[/p]
+				[/div]
+				,STYLE2);"
+		 	 >
+			 </hotspot>
+		  
+		  
+		 	 <hotspot name="index_gif"
+				style="new_spotd1_gif"
+				url="spotd4_gif.png"
+				scale="0.4"
+				ath="-179"
+				atv="-22"
+				zoom="true"
+				onhover="showtext(HOME,STYLE3)"
+				onclick="openurl(../Vidahouse-English/index.html,_self);"
+				
+			   >
+			  </hotspot>
+		  
+		  
+			  <hotspot name="what_gif"
+					style="new_spotd1_gif"
+					url="spotd4_gif.png"
+					scale="0.4"
+					ath="-176"
+					atv="15.3"
+					zoom="true"
+					handcursor="true"
+					onhover="showtext(what is vidahouse？,STYLE3)"
+					onclick="openurl(../Vidahouse-English/index.html#what,_self);"
+				   >
+			 	 </hotspot>
+			
+			   <hotspot name="see_gif"
+					style="new_spotd1_gif"
+					url="spotd4_gif.png"
+					scale="0.4"
+					ath="-160"
+					atv="19"
+					zoom="true"
+					handcursor="true"
+					onhover="showtext([div class=txt][img src=01.gif]
+					[h2 class=title]vidahouse介绍[/h2]
+					[p class=p1]我们的技术及资源可以让用户做的事是：[/p]
+					[p]电脑人工智慧，将房型图自动生成三维模型。一分钟完成毛胚房三维建制。
+					玩家生活研发的设计 dna系统，可以将设计秒变成各种优秀方案，效率奇高。[/p]
+					[/div]
+					,STYLE2);"
+			   >
+			  </hotspot>
+			  
+			   <hotspot name="we_do"
+					style="new_spotd1_gif"
+					url="spotd4_gif.png"
+					scale="0.4"
+					ath="155"
+					atv="16"
+					zoom="true"
+					handcursor="true"
+					onhover="showtext(what can we do for you ?,STYLE3)"
+					onclick="openurl(../Vidahouse-English/index.html#we-do,_self);"
+					>
+			   </hotspot>
+			 
+			   <hotspot name="case_gif"
+					style="new_spotd1_gif"
+					url="spotd4_gif.png"
+					scale="0.4"
+					ath="166"
+					atv="25"
+					handcursor="true"
+					onhover="showtext(successful cases?,STYLE3)"
+					onclick="openurl(../Vidahouse-English/index.html#cases,_self);"
+				>
+			   </hotspot>
+			   
+			 	 <!--<layer name="counttext" 
+				 	url="%SWFPATH%/plugins/textfield.swf" 
+				 	vcenter="true" 
+				 	visible="true"
+				 	alpha="0.4" 
+				 	html="鼠标右键可切换视角"
+				 	autowidth="false"
+				 	width="200"
+				 	keep="true" autoheight="true" 
+				   	align="rightbottom" x="8%" y="2.5%"
+				   	css="font-family: 宋体; font-size:16px; color:#fff; text-align:center; 
+				   	line-height:20px;" 
+				   	padding="5" roundedge="5" background="true"
+				  	backgroundcolor="#000" state="open" 
+				  	backgroundalpha="0.1" border="false" enabled="true" 
+				 	bordercolor="0x00AFC4" borderalpha="1.0" borderwidth="5.0"
+			  		 />-->
+			  
+		       <!--<action name="qrcode">
+				    jscall('dingwei.style.visibility = "visible";');
+				    jscall('pano.style.visibility = "hidden";');
+			   </action>-->
+			
+				<!--<hotspot name="iframe"
+			         url="hot_background.png"
+			         ath="10" atv="20"
+			         distorted="true"
+			         renderer="css3d"
+			         onloaded="delayedcall(0,add_iframe(../Vidahouse-English/index.html));"
+		         />
+		 
+				<action name="add_iframe" type="Javascript">
+				    var iframe = document.createElement("iframe");
+				    iframe.style.position = "absolute";
+				    iframe.style.left = 100;
+				    iframe.style.top = 50;
+				    iframe.style.width = "100%";
+				    iframe.style.height = "100%";
+				    iframe.style.border = 0;
+				    iframe.src = args[1];
+				    iframe.setAttribute('id',resolve(caller.name));
+				    caller.registercontentsize(args[2], args[3]);
+				    caller.sprite.appendChild(iframe);
+				</action>
+			
+		-->
+				
+	     
+			     <!--  跳到首页-->
+					<!--<hotspot name="to-index"
+					url="hot_background.png"
+					ath="-179"
+					atv="-22"
+					scale="0.3"
+					text="HOME"
+					handcursor="true"
+					css="z-index:2000"
+					onloaded="add_all_the_time_tooltip()"
+					onclick="openurl(../Vidahouse-English/index.html,_self);"
+				>
+				</hotspot>-->
+	
+				<!--  跳到首页相应位置-->
+				<!--<hotspot name="what"
+					url="hot_background.png"
+					ath="-176"
+					atv="15.3"
+					scale="0.5"
+					handcursor="true"
+					text="what is vidahouse？"
+					onloaded="add_all_the_time_tooltip()"
+					onclick="openurl(../Vidahouse-English/index.html#what,_self);"
+				 >
+				</hotspot>-->
+				
+				<!--<hotspot name="we-do"
+					url="hot_background.png"
+					ath="155"
+					atv="16"
+					scale="0.7"
+					handcursor="true"
+					text="what can we do for you ?"
+					onloaded="add_all_the_time_tooltip()"
+					onclick="openurl(../Vidahouse-English/index.html#we-do,_self);"
+				  >
+				</hotspot>-->
+				
+				<!--<hotspot name="cases"
+				url="hot_background.png"
+				ath="166"
+				atv="25"
+				scale="0.5"
+				handcursor="true"
+				text="successful cases?"
+				onloaded="add_all_the_time_tooltip()"
+				onclick="openurl(../Vidahouse-English/index.html#cases,_self);"
+			 >
+				</hotspot>-->
+			
+				<layer name="text" style="title_text">
+					
+				</layer>
+				
+				
+		
+
+		
+	</scene>
+
+	 <!-- 场景二-->
+		<scene name="drawing_room02" title="复古风格" onstart="" thumburl="scene02.jpg">
+			
+			<!--<plugin name="hotspot_pos_info"
+				url="%SWFPATH%/plugins/textfield.swf"
+				html="drag the hotspots..."
+				css="font-family:Courier;"
+				padding="8"
+				align="lefttop" x="10" y="10"
+				width="200"
+				enabled="false"
+			/>-->
+
+		<!--插入音乐-->
+			  <!--<plugin name="snd" url="soundonoff.png" align="leftbottom" x="50" y="10" alpha="0.25" scale="0.5" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+			  />
+			  <plugin name="soundinterface"
+					url.flash="%SWFPATH%/plugins/soundinterface.swf"
+					url.html5="%SWFPATH%/plugins/soundinterface.js"
+					rootpath=""
+					preload="true"
+					keep="true"
+				/>
+				
+			<events name="currentpano"
+				onnewpano="playsound(bgsnd, 'http://krpano.com/panos/xmas/ding_dong_merrily_on_high.mp3|http://krpano.com/panos/xmas/ding_dong_merrily_on_high.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+			/>-->
+		
+		<view hlookat="130" vlookat="-10" fovtype="MFOV" fov="120" fovmin="50" fovmax="120" />
+		
+			<image>
+				<sphere url="11.jpg"/>
+			</image>
+		
+			 <layer name="vidahouse"
+				 style="title_text"
+				 html.desktop="Vidahouse"
+				/>
+			
+			<hotspot name="spot2"
+				style="new_spotd1_gif"
+				url="new_spotd1_gif.png"
+				scale="0.4"
+				ath="151"
+				atv="6"
+				zoom="true"
+				ondown="draghotspot();"
+				onclick="transition(spot2,1.0,0.0,0,drawing_room,-86, 3, 45);"
+			/>
+		
+			
+	</scene>
+</krpano>
+
